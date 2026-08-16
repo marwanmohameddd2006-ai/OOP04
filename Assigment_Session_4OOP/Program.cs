@@ -1,4 +1,8 @@
-﻿namespace Assigment_Session_4OOP
+﻿using Assigment_Session_4OOP.Delivery;
+using Assigment_Session_4OOP.Interfaces;
+using Assigment_Session_4OOP.Shipment__child;
+
+namespace Assigment_Session_4OOP
 {
     internal class Program
     {
@@ -75,6 +79,67 @@
 
 
 
+            #endregion
+
+            #region Part 02 — Practical 
+
+            //a.
+            StandardShipment ss = new StandardShipment("SH001", "Laptop", 3, 80);
+
+            //b.
+            ExpressShipment es = new ExpressShipment("SH002", "Mobile Phone", 2, 60, 30);
+
+            //c.
+            InternationalShipment Is = new InternationalShipment("SH003", "Television", 8, 120, "Germany", 100);
+
+            //d.
+            DeliveryCenter D1 = new DeliveryCenter(3);
+            D1.AddShipment(ss);
+            D1.AddShipment(es);
+            D1.AddShipment(Is);
+
+            Console.WriteLine("======================================\n");
+            Console.WriteLine("DeliveryCenter\n");
+            Console.WriteLine("======================================\n");
+            //e.
+            DeliveryHelper D2 = new DeliveryHelper();
+            Console.WriteLine(D2.PrintShipmentDetails(ss));
+            Console.WriteLine("---------------------------------------\n");
+            Console.WriteLine(D2.PrintShipmentDetails(es));
+            Console.WriteLine("---------------------------------------\n");
+            Console.WriteLine(D2.PrintShipmentDetails(Is));
+            Console.WriteLine("======================================\n");
+
+            //f & g
+            Console.WriteLine("Print TrackingStatuses By Method in DeliveryCenter\n");
+            Console.WriteLine("=====================================");
+            D1.PrintTrackingStatuses();
+            Console.WriteLine("=====================================");
+            //h.
+            Console.WriteLine("Print TrackingStatuses By Array\n");
+            Console.WriteLine("=====================================");
+            ITrackable[] itrack =
+            {
+                ss , es , Is
+            };
+            foreach (ITrackable t in itrack)
+            {
+                Console.WriteLine($"{t.GetTrackingStatus()}");
+            }
+
+            Console.WriteLine("======================================");
+
+            //i
+            IInsurable[] insur =
+            {
+                ss , es , Is
+            };
+
+
+            for (int i = 0; i < insur.Length; i++)
+            {
+                Console.WriteLine($"Shipment {insur[i].ToString()}  Insurance : {insur[i].CalculateInsurance()} EGP");
+            }
             #endregion
         }
     }
